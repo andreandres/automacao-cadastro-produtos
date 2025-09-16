@@ -6,7 +6,7 @@ pyautogui.PAUSE = 0.5
 pyautogui.press("win")
 pyautogui.write("edge")
 pyautogui.press("enter")
-pyautogui.write("https://andreandres.github.io/automacao-cadastro-produtos")
+pyautogui.write("https://andreandres.github.io/automacao-cadastro-produtos") #URL DO SITE AQUI
 pyautogui.press("enter")
 sleep(3)
 
