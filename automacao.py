@@ -29,7 +29,7 @@ tabela = pandas.read_csv("produtos.csv")
 print(tabela)
 
 for linha in tabela.index: #para cada linha da tabela
-    pyautogui.click(x=640, y=396) #Colocar a posicao inicial do mouse aqui (use o arquivo para pegar posicao para auxiliar)
+    pyautogui.press("tab")
     
     codigo = tabela.loc[linha, "codigo"]
     pyautogui.write(str(codigo))
@@ -60,7 +60,6 @@ for linha in tabela.index: #para cada linha da tabela
     if obs != "nan":
         pyautogui.write((obs))
 
-    pyautogui.press("tab")
     pyautogui.press("enter")
 
     pyautogui.scroll(10000)

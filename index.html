@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF--8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Produtos</title>
     <style>
@@ -26,7 +26,7 @@
             text-align: center;
         }
         #product-page {
-            display: none; /* Inicia oculto */
+            display: none;
         }
         h1, h2 {
             color: #333;
@@ -96,10 +96,36 @@
         .full-width {
             grid-column: 1 / -1;
         }
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 0;
+        }
+        .collapsible-header h2 {
+            margin: 0;
+        }
+        .toggle-arrow {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+        .toggle-arrow.open {
+            transform: rotate(180deg);
+        }
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+        .collapsible-content.open {
+            max-height: 1000px;
+            transition: max-height 0.4s ease-in;
+        }
     </style>
 </head>
 <body>
-
     <div class="container">
         <div id="login-page">
             <h1>Acesso ao Sistema</h1>
@@ -154,38 +180,43 @@
 
             <hr style="margin: 20px 0;">
 
-            <h2>Produtos Registrados</h2>
-            <table id="product-table">
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Marca</th>
-                        <th>Tipo</th>
-                        <th>Categoria</th>
-                        <th>Preço Unit.</th>
-                        <th>Custo</th>
-                        <th>Observações</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div class="collapsible-header" id="collapsible-header">
+                <h2>Produtos Registrados</h2>
+                <svg class="toggle-arrow" id="toggle-arrow" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                </svg>
+            </div>
+            
+            <div class="collapsible-content" id="collapsible-content">
+                <table id="product-table">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Marca</th>
+                            <th>Tipo</th>
+                            <th>Categoria</th>
+                            <th>Preço Unit.</th>
+                            <th>Custo</th>
+                            <th>Observações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     </tbody>
-            </table>
+                </table>
+            </div>
         </div>
     </div>
 
     <script>
-        // Lógica de "Login"
         document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o envio real do formulário
+            event.preventDefault();
             document.getElementById('login-page').style.display = 'none';
             document.getElementById('product-page').style.display = 'block';
         });
 
-        // Lógica do Registro de Produtos
         document.getElementById('product-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o envio real do formulário
+            event.preventDefault();
 
-            // 1. Capturar os valores dos campos
             const codigo = document.getElementById('codigo').value;
             const marca = document.getElementById('marca').value;
             const tipo = document.getElementById('tipo').value;
@@ -194,11 +225,9 @@
             const custo = parseFloat(document.getElementById('custo').value).toFixed(2);
             const obs = document.getElementById('obs').value;
 
-            // 2. Adicionar os valores na tabela
             const tableBody = document.querySelector('#product-table tbody');
-            const newRow = tableBody.insertRow(); // Cria uma nova linha <tr>
+            const newRow = tableBody.insertRow(); 
 
-            // Cria as células <td> e insere o conteúdo
             newRow.insertCell(0).textContent = codigo;
             newRow.insertCell(1).textContent = marca;
             newRow.insertCell(2).textContent = tipo;
@@ -207,13 +236,19 @@
             newRow.insertCell(5).textContent = `R$ ${custo}`;
             newRow.insertCell(6).textContent = obs;
 
-            // 3. Limpar o formulário
             document.getElementById('product-form').reset();
             
-            // Opcional: focar no primeiro campo novamente
             document.getElementById('codigo').focus();
         });
-    </script>
 
+        const header = document.getElementById('collapsible-header');
+        const content = document.getElementById('collapsible-content');
+        const arrow = document.getElementById('toggle-arrow');
+
+        header.addEventListener('click', function() {
+            content.classList.toggle('open');
+            arrow.classList.toggle('open');
+        });
+    </script>
 </body>
 </html>
