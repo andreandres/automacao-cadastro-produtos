@@ -4,7 +4,7 @@ from time import sleep
 
 pyautogui.PAUSE = 0.5
 pyautogui.press("win")
-pyautogui.write("edge")
+pyautogui.write("edge") # Configuracoes do mouse estao para MICROSOFT EDGE em 1920x1080 tela cheia, para outro navegador ou resolucao pegar nova posicao do mouse 
 pyautogui.press("enter")
 pyautogui.write("https://andreandres.github.io/automacao-cadastro-produtos") #URL DO SITE AQUI
 pyautogui.press("enter")
@@ -61,5 +61,3 @@ for linha in tabela.index: #para cada linha da tabela
         pyautogui.write((obs))
 
     pyautogui.press("enter")
-
-    pyautogui.scroll(10000)
