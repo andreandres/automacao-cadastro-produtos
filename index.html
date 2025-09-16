@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF--8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Produtos</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        #login-page {
+            text-align: center;
+        }
+        #product-page {
+            display: none; /* Inicia oculto */
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 80px;
+        }
+        button {
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="login-page">
+            <h1>Acesso ao Sistema</h1>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" name="username" placeholder="Digite qualquer usuário">
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" placeholder="Digite qualquer senha">
+                </div>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+
+        <div id="product-page">
+            <h2>Registro de Novos Produtos</h2>
+            <form id="product-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="codigo">Código</label>
+                        <input type="text" id="codigo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="marca">Marca</label>
+                        <input type="text" id="marca" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo">Tipo</label>
+                        <input type="text" id="tipo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria">Categoria (Número)</label>
+                        <input type="number" id="categoria" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="preco">Preço Unitário</label>
+                        <input type="number" id="preco" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="custo">Custo</label>
+                        <input type="number" id="custo" step="0.01" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="obs">Observações</label>
+                        <textarea id="obs"></textarea>
+                    </div>
+                </div>
+                <button type="submit">Registrar Produto</button>
+            </form>
+
+            <hr style="margin: 20px 0;">
+
+            <h2>Produtos Registrados</h2>
+            <table id="product-table">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Marca</th>
+                        <th>Tipo</th>
+                        <th>Categoria</th>
+                        <th>Preço Unit.</th>
+                        <th>Custo</th>
+                        <th>Observações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de "Login"
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio real do formulário
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('product-page').style.display = 'block';
+        });
+
+        // Lógica do Registro de Produtos
+        document.getElementById('product-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio real do formulário
+
+            // 1. Capturar os valores dos campos
+            const codigo = document.getElementById('codigo').value;
+            const marca = document.getElementById('marca').value;
+            const tipo = document.getElementById('tipo').value;
+            const categoria = document.getElementById('categoria').value;
+            const preco = parseFloat(document.getElementById('preco').value).toFixed(2);
+            const custo = parseFloat(document.getElementById('custo').value).toFixed(2);
+            const obs = document.getElementById('obs').value;
+
+            // 2. Adicionar os valores na tabela
+            const tableBody = document.querySelector('#product-table tbody');
+            const newRow = tableBody.insertRow(); // Cria uma nova linha <tr>
+
+            // Cria as células <td> e insere o conteúdo
+            newRow.insertCell(0).textContent = codigo;
+            newRow.insertCell(1).textContent = marca;
+            newRow.insertCell(2).textContent = tipo;
+            newRow.insertCell(3).textContent = categoria;
+            newRow.insertCell(4).textContent = `R$ ${preco}`;
+            newRow.insertCell(5).textContent = `R$ ${custo}`;
+            newRow.insertCell(6).textContent = obs;
+
+            // 3. Limpar o formulário
+            document.getElementById('product-form').reset();
+            
+            // Opcional: focar no primeiro campo novamente
+            document.getElementById('codigo').focus();
+        });
+    </script>
+
+</body>
+</html>

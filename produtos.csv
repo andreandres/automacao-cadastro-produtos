@@ -1,0 +1,8 @@
+codigo,marca,tipo,categoria,preco_unitario,custo,obs
+SKU001,TechCorp,Mouse Gamer,1,149.90,85.50,"Modelo com RGB personalizavel"
+SKU002,OfficePro,Teclado Mecanico,1,299.00,170.00,"Switch blue, padrao ABNT2"
+SKU003,SoundMax,Headset 7.1,2,350.50,210.25,"Acompanha software de equalizacao"
+SKU004,WebCam HD,Camera Full HD,3,199.99,110.00,"Produto importado, verificar lote."
+SKU005,CleanOffice,Kit Limpeza Eletronicos,4,45.00,20.00,""
+SKU006,DataBank,HD Externo 1TB,5,450.00,280.00,"Compativel com USB 3.0"
+SKU007,PrintFast,Impressora Multifuncional,6,899.90,650.00,"Acompanha cartucho inicial"
