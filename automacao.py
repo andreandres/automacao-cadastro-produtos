@@ -2,17 +2,17 @@ import pyautogui
 from time import sleep
 #abrir navegador e sistema
 
-pyautogui.PAUSE = 0.5
+pyautogui.PAUSE = 0.3
 pyautogui.press("win")
-pyautogui.write("edge") # Configuracoes do mouse estao para MICROSOFT EDGE em 1920x1080 tela cheia, para outro navegador ou resolucao pegar nova posicao do mouse 
-pyautogui.press("enter")
+pyautogui.write("edge") #Configuracoes do mouse estao para MICROSOFT EDGE em 1920x1080 tela cheia, para outro navegador ou resolucao pegar nova posicao do mouse 
+pyautogui.press("enter") 
 pyautogui.write("https://andreandres.github.io/automacao-cadastro-produtos") #URL DO SITE AQUI
 pyautogui.press("enter")
-sleep(3)
+sleep(2)
 
 #fazer login
 
-pyautogui.click(x=691, y=542) #Colocar a posicao inicial do mouse aqui (use o arquivo para pegar posicao para auxiliar)
+pyautogui.click(x=665, y=535) #Colocar a posicao inicial do mouse aqui (use o arquivo para pegar posicao para auxiliar)
 pyautogui.write("emailteste@gmail.com")
 pyautogui.press("tab")
 pyautogui.write("senhateste123")
@@ -29,7 +29,7 @@ tabela = pandas.read_csv("produtos.csv")
 print(tabela)
 
 for linha in tabela.index: #para cada linha da tabela
-    pyautogui.press("tab")
+    pyautogui.click(x=640, y=411) #Colocar a posicao inicial do mouse aqui (use o arquivo para pegar posicao para auxiliar)
     
     codigo = tabela.loc[linha, "codigo"]
     pyautogui.write(str(codigo))
@@ -59,5 +59,5 @@ for linha in tabela.index: #para cada linha da tabela
     
     if obs != "nan":
         pyautogui.write((obs))
-
+    pyautogui.press("tab")
     pyautogui.press("enter")
